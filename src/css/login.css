@@ -1,3 +1,25 @@
+@font-face {
+    font-family: 'davat';
+    src: url('../fonts/BDavat.eot');
+    src: url('../fonts/BDavat.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/BDavat.woff2') format('woff2'),
+        url('../fonts/BDavat.woff') format('woff'),
+        url('../fonts/BDavat.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'yekan';
+    src: url('../fonts/BYekan.eot');
+    src: url('../fonts/BYekan.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/BYekan.woff2') format('woff2'),
+        url('../fonts/BYekan.woff') format('woff'),
+        url('../fonts/BYekan.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html,
 body {
     height: 100%;
@@ -7,19 +29,27 @@ body {
     align-items: center;
     padding-top: 40px;
     padding-bottom: 40px;
-    /* background-color:  #f5f5f5; */
-    background-image: url('../images/bg-07.jpg');
+    background-color:  #f5f5f5;
+      
+}
+.body_bg{
+    background-image: url('../images/bg-08.jpg');
     opacity: 0.9;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;    
+    background-size: cover;
+    height: 100%;
+    width: 100%;  
+    position: absolute; 
+    top: 0; 
+    left: 0;
 }
 
 .form-signin {
     width: 100%;
     max-width: 300px;
     padding: 20px;
-    margin: auto;
+    margin: auto;    
 }
 .form-signin .checkbox {
     font-weight: 400;
@@ -54,4 +84,8 @@ body {
 
 .form-signin .copyright-text{
     font-size: 10px;
+}
+
+.copyright {
+    font-size: 13px;
 }

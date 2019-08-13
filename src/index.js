@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.css';
 import 'font-awesome/css/font-awesome.css';
-import './index.css';
+import './css/index.css';
 import './css/login.css'
 import * as serviceWorker from './serviceWorker';
 import Login from './components/admin/login';

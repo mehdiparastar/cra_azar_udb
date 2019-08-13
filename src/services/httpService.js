@@ -8,7 +8,7 @@ axios.interceptors.response.use(null, error => {
 
     if (!expectedError) {
         console.log('Logging the error:', error)
-        toast.error('خطایی رخ داده است')
+        // toast.error('خطایی رخ داده است')
 
         return Promise.reject(error)
     }

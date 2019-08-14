@@ -8,11 +8,13 @@ import './css/index.css';
 import './css/login.css'
 import * as serviceWorker from './serviceWorker';
 import Login from './components/admin/login';
+import MainPage from './components/mainPage';
 
 ReactDOM.render(
     <BrowserRouter>
         <Switch>
             <Route path='/login' component={Login} />
+            <Route path='/' component={MainPage}/>
         </Switch>
     </BrowserRouter>,
     document.getElementById('root'));

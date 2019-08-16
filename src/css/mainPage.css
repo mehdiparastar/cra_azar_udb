@@ -1,0 +1,25 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color:  #f5f5f5;
+      
+}
+
+.main_page_bg{
+    /* background-image: url('../images/bg-02/bg (9).jpg');     */
+    opacity: 0.9;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;  
+    position: absolute; 
+    top: 0; 
+    left: 0;
+}

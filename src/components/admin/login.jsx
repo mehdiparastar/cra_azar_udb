@@ -27,7 +27,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='body_bg'>
+            <div className='login_page_bg' >
                 <form onSubmit={this.handleSubmit} className='rtl form-signin border rounded m-2 mt-5 mx-auto bg-light shadow'>
                     <div className="text-center">
                         <img src='https://www.cra.ir/Skin/Cra95/CraLogoCircle.png' className="img-fluid m-2" alt="" width="120" height="230"></img>

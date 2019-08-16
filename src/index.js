@@ -5,17 +5,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.css';
 import 'font-awesome/css/font-awesome.css';
 import './css/index.css';
-import './css/login.css'
+import './css/login.css';
+import './css/mainPage.css';
 import * as serviceWorker from './serviceWorker';
 import Login from './components/admin/login';
 import MainPage from './components/mainPage';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter>        
         <Switch>
             <Route path='/login' component={Login} />
             <Route path='/' component={MainPage}/>
-        </Switch>
+        </Switch>        
     </BrowserRouter>,
     document.getElementById('root'));
 

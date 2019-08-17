@@ -3,8 +3,8 @@ import logo from '../images/CraLogoCircle.png'
 import history_img from '../images/cra-img/01.jpg'
 import duties_img from '../images/cra-img/02.jpg'
 import bases_img from '../images/cra-img/03.jpeg'
-import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Card, CardDeck, Container, ListGroup } from 'react-bootstrap'
-// Badge, ProgressBar, Container, Tab, Row, Col, Breadcrumb, Jumbotron, Table 
+import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Card, CardDeck, Container, ListGroup, Row, Spinner } from 'react-bootstrap'
+// Badge, ProgressBar, Container, Tab, Col, Breadcrumb, Jumbotron, Table 
 
 class MainPage extends Component {
 
@@ -15,7 +15,7 @@ class MainPage extends Component {
 
                 <Navbar bg="dark" variant="dark" expand="md" sticky="top">
                     <Navbar.Brand href="#home">
-                        <img alt="craLogo" src={logo} width="35" height="35" className="d-inline-block align-top"/>
+                        <img id="craLogo" alt="craLogo" src={logo} width="35" height="35" className="bg-light rounded d-inline-block align-top" />
                         <span className='px-2'>اداره کل تنظیم مقررات و ارتباطات رادیویی منطقه آذر</span>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -78,12 +78,27 @@ class MainPage extends Component {
                     </CardDeck>
                 </Container>
 
-                <Navbar bg="dark" variant="dark" expand="md"  fixed="bottom" className="p-0 m-0 justify-content-center">
+                <Navbar bg="dark" variant="dark" expand="md" fixed="bottom" className="p-0 m-0 justify-content-center">
                     <Navbar.Text>
                         <span className='fa fa-copyright m-1' />
-                        <span className='copyright-text'>اداره کل تنظیم مقررات و ارتباطات رادیویی منطقه آذر</span>
+                        <span className='copyright-text'>تمامی حقوق متعلق به اداره کل منطقه آذر می باشد.</span>
                     </Navbar.Text>
                 </Navbar>
+
+                <Container>
+                    <Row className="justify-content-center mt-4 mb-5 mx-4 ">
+                        <Button href="/login" variant="warning" className="shadow" size="lg" >
+                            <Spinner className="mr-2 ml-0 mb-1" variant="success" as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                            <Spinner className="mr-2 ml-0 mb-1" variant="light" as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                            <Spinner className="mr-2 ml-0 mb-1" variant="danger" as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                            اتصال به پایگاه داده جامع اداره کل منطقه آذر
+                            <Spinner className="ml-2 mr-0 mb-1" variant="danger" as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                            <Spinner className="ml-2 mr-0 mb-1" variant="light" as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                            <Spinner className="ml-2 mr-0 mb-1" variant="success" as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                        </Button>
+                    </Row>
+                </Container>
+
             </div>
         );
     }

@@ -5,6 +5,6 @@ import config from '../../src/config.json'
 //     return http.post(config.api_login,{email,password})     
 // }
 
-export function getNameOfUser(token) {
-    return http.get(config.api_user + '/userfullname',{token})
+export function getFullNameOfUser(token) {
+    return http.get(config.api_users + '/userfullname',{token})
 }

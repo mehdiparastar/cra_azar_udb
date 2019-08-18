@@ -14,8 +14,8 @@ class Login extends Component {
         try {
             const { data } = await login(this.state.email, this.state.password)
             localStorage.setItem('token', data)
-            this.props.history.replace('/admin')
-
+            window.location.replace('/admin') 
+            
         } catch (ex) {
             toast.error(<div className='text-center' style={{fontFamily:"b mitra"}}> ایمیل و یا پسورد اشتباه است</div>)
             console.log('ex' + ex)

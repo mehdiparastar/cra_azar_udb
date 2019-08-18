@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { getFullNameOfUser } from '../../services/userService'
-// import { getPostsCount } from '../../services/postService';
-// import { getCourseCount } from '../../services/courseService';
+import { toast } from 'react-toastify';
+import { Navbar, Nav, NavbarBrand } from 'react-bootstrap';
 
 
 class NavBar extends Component {
@@ -11,35 +11,32 @@ class NavBar extends Component {
     }
 
     async componentDidMount() {
-        const { data: userFullName } = await getFullNameOfUser(localStorage.token)
-        this.setState({
-            userFullName: userFullName.fullname
-        })
+        try {
+            const { data: userFullName } = await getFullNameOfUser()
+            this.setState({ userFullName: userFullName.fullname })
+        } catch (ex) {
+            toast.error(<div className='text-center rtl' style={{ fontFamily: "b mitra" }}>مشکلی پیش آمده است.</div>)
+            console.log('ex' + ex)
+        }
     }
 
     render() {
-        const { postCount, courceCount } = this.state
+        const { userFullName } = this.state
         return (
-            <nav className='rtl navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow'>
-                <a className='navbar-brand col-sm-3 col-md-2 mr-0' href='www.google.com'>
-                    سلام مهدی
-            </a>
-                <p className='mt-2' style={{ color: 'white' }}>
-                    تعداد پست ها
-                <span className='badge badge-warning badge-pill m-1'>{postCount}</span>
-                </p>
-                <p className='mt-2' style={{ color: 'white' }}>
-                    تعداد دوره ها
-                <span className='badge badge-warning badge-pill m-1'>{courceCount}</span>
-                </p>
-                <ul className='navbar-nav px-3'>
-                    <li className='nav-item text-nowrap'>
-                        <Link className='nav-link' to='/admin/logout'>
-                            خروج
-                    </Link>
-                    </li>
-                </ul>
-            </nav>
+            <Navbar bg="dark" variant="dark" expand="md" fixed="top" className="flex-md-nowrap p-0  rtl shadow">
+                <NavbarBrand>
+                    <img id="craLogo" alt="craLogo" src="https://i.pravatar.cc/70" width="60" height="60" className="rounded-circle d-inline-block align-top m-0" />
+                </NavbarBrand>
+                <NavbarBrand>
+                    <span className='text-warning text-wrap' style={{fontSize:13}}>Hi, {userFullName.split(' ')[0].toUpperCase()}</span>
+                </NavbarBrand>                
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav.Link className="ml-auto">
+                        <Link to='/admin/logout' className="text-warning">خروج</Link>
+                    </Nav.Link>
+                </Navbar.Collapse>
+            </Navbar>
         );
     }
 }

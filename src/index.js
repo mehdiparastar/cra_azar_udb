@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import Login from './components/admin/login';
 import MainPage from './components/mainPage';
 import Dashboard from './components/admin/dashboard'
+import CreateUser from './components/admin/createUser';
 
 
 ReactDOM.render(
@@ -22,8 +23,9 @@ ReactDOM.render(
                 path="/admin"
                 render={() => {
                     if (localStorage.getItem('token')) return <Dashboard />
-                    else return <Redirect to="/"/>
+                    else return <Redirect to="/" />
                 }} />
+            <Route exact path="/createuser" component={CreateUser} />
         </Switch>
     </BrowserRouter>,
     document.getElementById('root'));

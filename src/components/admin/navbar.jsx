@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import { getFullNameOfUser } from '../../services/userService'
 import { toast } from 'react-toastify';
 import { Navbar, Nav, NavbarBrand } from 'react-bootstrap';
 
-
 class NavBar extends Component {
-    state = {
-        userFullName: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            userFullName: ''
+        }
     }
 
     async componentDidMount() {
@@ -20,7 +21,7 @@ class NavBar extends Component {
         }
     }
 
-    render() {
+    render() { 
         const { userFullName } = this.state
         return (
             <Navbar bg="dark" variant="dark" expand="md" fixed="top" className="flex-md-nowrap p-0  rtl shadow">
@@ -32,13 +33,11 @@ class NavBar extends Component {
                 </NavbarBrand>                
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav.Link className="ml-auto">
-                        <Link to='/admin/logout' className="text-warning">خروج</Link>
-                    </Nav.Link>
+                    <Nav.Link className="ml-auto text-warning" href="/admin/logout">خروج</Nav.Link>                    
                 </Navbar.Collapse>
             </Navbar>
         );
     }
 }
-
+ 
 export default NavBar;

@@ -1,0 +1,24 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color:  #f5f5f5;
+      
+}
+
+.create-user{
+    background-image: url('../images/bg-01/bg-09.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;  
+    position: absolute; 
+    top: 0; 
+    left: 0;    
+}

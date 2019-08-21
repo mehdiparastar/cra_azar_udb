@@ -1,33 +1,64 @@
 import React, { Component } from 'react';
 import { Container, Form, FormGroup, Button, Col, InputGroup, Image, Card } from 'react-bootstrap';
-// import userAvatar from '../../images/man.png'
+// import userAvatar from '../../images/man.png' https://www.npmjs.com/package/react-bootstrap-validation
 import Avatar from 'react-avatar-edit'
+import { createUser } from '../../services/userService';
+import { toast } from 'react-toastify';
 
 class CreateUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {
-                fullname: '',
-                email: '',
-                password: '',
-                tokens: '',
-                roles: '',
-                useravatar: ''
-            },
-            validated: false,
+            firstname: '',
+            lastname: '',
+            email: '',
+            password: '',
+            repeatpassword: '',
+            roles: [],
             preview: null,
+            validated: false,
             src: null
         }
     }
 
-    handleSubmit = event => {
-        console.log('mehdi')
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            console.log(form)
-            event.preventDefault();
-            event.stopPropagation();
+    formIsValid = () => {
+        const password = { ...this.state.password };
+        const confirmPassword = { ...this.state.repeatpassword };
+        let isGood = true;
+
+        if (password!==confirmPassword){
+            confirmPassword.message = 'رمز عبور بایستی یکسان باشند.'
+            isGood=false
+        }
+                
+        if (!isGood) {
+          this.setState({
+            password,
+            confirmPassword,
+          });
+        }
+        console.log(isGood)
+        return isGood;
+      }
+
+    handleSubmit = async e => {
+        e.preventDefault();
+        const form = e.currentTarget;
+
+        if ((form.checkValidity() === false) || (!this.formIsValid())) {
+            console.log('mehdi')            
+            e.stopPropagation();
+        }
+        else {
+            console.log('parastar')
+            try {
+                const { data } = await createUser(JSON.parse(JSON.stringify(this.state)))
+                console.log(data)
+                window.location.replace('/admin')
+            } catch (ex) {
+                toast.error(<div className='text-center' style={{ fontFamily: "b mitra" }}> ایمیل و یا پسورد اشتباه است</div>)
+                console.log('ex' + ex)
+            }
         }
         this.setState({ validated: true })
     }
@@ -71,7 +102,7 @@ class CreateUser extends Component {
                                 <Form.Row>
                                     <FormGroup as={Col} controlId="formFirstName">
                                         <Form.Label>نام</Form.Label>
-                                        <Form.Control required type="text" placeholder="نام" />
+                                        <Form.Control required type="text" placeholder="نام" onChange={e => this.setState({ firstname: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             <Form.Text className="text-muted">وارد کردن نام الزامی می باشد.</Form.Text>
                                         </Form.Control.Feedback>
@@ -79,7 +110,7 @@ class CreateUser extends Component {
                                     </FormGroup>
                                     <FormGroup as={Col} controlId="formLastName">
                                         <Form.Label>نام خانوادگی</Form.Label>
-                                        <Form.Control required type="text" placeholder="نام خانوادگی" />
+                                        <Form.Control required type="text" placeholder="نام خانوادگی" onChange={e => this.setState({ lastname: e.target.value })} />
                                         <Form.Control.Feedback type="invalid">
                                             <Form.Text className="text-muted">وارد کردن نام خانوادگی الزامی می باشد.</Form.Text>
                                         </Form.Control.Feedback>
@@ -98,7 +129,8 @@ class CreateUser extends Component {
                                                 aria-describedby="email"
                                                 required
                                                 type="email"
-                                                placeholder="آدرس پست الکترونیکی خود را وارد کنید." />
+                                                placeholder="آدرس پست الکترونیکی خود را وارد کنید."
+                                                onChange={e => this.setState({ email: e.target.value })} />
                                             <Form.Control.Feedback type="invalid">
                                                 <Form.Text className="text-muted">وارد کردن آدرس ایمیل صحیح ضروری می باشد.</Form.Text>
                                             </Form.Control.Feedback>
@@ -117,7 +149,8 @@ class CreateUser extends Component {
                                             <Form.Control
                                                 required type="password"
                                                 placeholder="رمز عبور مورد نظر را وارد نمایید"
-                                                aria-describedby="password" />
+                                                aria-describedby="password"
+                                                onChange={e => this.setState({ password: e.target.value })} />
                                             <Form.Control.Feedback type="invalid">
                                                 <Form.Text className="text-muted">وارد کردن رمز عبور الزامی می باشد.</Form.Text>
                                             </Form.Control.Feedback>
@@ -133,7 +166,8 @@ class CreateUser extends Component {
                                             <Form.Control
                                                 required type="password"
                                                 // placeholder="رمز عبور را تکرار نمایید"
-                                                aria-describedby="repeatPassword" />
+                                                aria-describedby="repeatPassword"
+                                                onChange={e => this.setState({ repeatpassword: e.target.value })} />
                                             <Form.Control.Feedback type="invalid">
                                                 <Form.Text className="text-muted">وارد کردن تکرار رمز عبور الزامی می باشد.</Form.Text>
                                             </Form.Control.Feedback>
@@ -145,7 +179,7 @@ class CreateUser extends Component {
                                 <Form.Row>
                                     <Form.Group as={Col} controlId="formRoles">
                                         <Form.Label>نقش کاربر در سیستم</Form.Label>
-                                        <Form.Control required as="select" multiple>
+                                        <Form.Control required as="select" multiple onChange={e => this.setState({ roles: e.target.value })}>
                                             <option value="admin">مدیر سیستم</option>
                                             <option value="post_pishkhan_user">کاربر پست و پیشخوان</option>
                                             <option value="village_fix_wired_user">کاربر تلفن ثابت روستایی</option>

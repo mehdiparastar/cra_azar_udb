@@ -5,9 +5,9 @@ import validator from 'validator';
 
 class CreateUser extends Component {
     formDefaults = {
-        email: { value: '', isValid: true, message: '' },
-        password: { value: '', isValid: true, message: '' },
-        confirmPassword: { value: '', isValid: true, message: '' }
+        email: { value: '', isValid: '', message: '', focused: false },
+        password: { value: '', isValid: '', message: '', focused: false },
+        confirmPassword: { value: '', isValid: '', message: '', focused: false }
     }
 
     state = {
@@ -15,7 +15,6 @@ class CreateUser extends Component {
     };
 
     onChange = async e => {
-
         const state = {
             ...this.state,
             [e.target.name]: {
@@ -35,42 +34,70 @@ class CreateUser extends Component {
             console.log('not validate')
     }
 
+    onFocus = e => {
+        const state = {
+            ...this.state,
+            [e.target.name]: {
+                ...this.state[e.target.name],
+                focused: true
+            }
+        }
+        this.setState(state)
+    }
+
     formIsValid = () => {
         const email = { ...this.state.email }
         const password = { ...this.state.password }
         const confirmPassword = { ...this.state.confirmPassword }
-        let isGood = true
+        let isGood = false
 
-        if (!validator.isEmail(email.value)) {
-            email.isValid = false
-            email.message = 'Not a valid Email address'
-            isGood = false
-        } else {
-            email.isValid = true
-            email.message = ''
-            isGood = true
+        if (email.focused) {
+            if (!validator.isEmail(email.value)) {
+                email.isValid = 'is-invalid'
+                email.message = 'Not a valid Email address'
+                isGood = false
+            } else if (email.value.length === 0) {
+                email.isValid = ''
+                email.message = 'cant be empty'
+                isGood = false
+            } else {
+                email.isValid = 'is-valid'
+                email.message = ''
+                isGood = true
+            }
         }
 
-        if (password.value.length > 12 || password.value.length < 6) {
-            password.isValid = false
-            password.message = 'password length be 6-12'
-            isGood = false
-        } else {
-            password.isValid = true
-            password.message = ''
-            isGood = true
+        if (password.focused) {
+            if ((password.value.length > 12 || password.value.length < 6)) {
+                password.isValid = 'is-invalid'
+                password.message = 'password length be 6-12'
+                isGood = false
+            } else if (password.value.length === 0) {
+                password.isValid = ''
+                password.message = 'cant be empty'
+                isGood = false
+            } else {
+                password.isValid = 'is-valid'
+                password.message = ''
+                isGood = true
+            }
         }
 
-        if (password.value !== confirmPassword.value) {
-            confirmPassword.isValid = false
-            confirmPassword.message = 'not matching passwords'
-            isGood = false
-        } else {
-            confirmPassword.isValid = true
-            confirmPassword.message = ''
-            isGood = true
+        if (confirmPassword.focused) {
+            if ((password.value !== confirmPassword.value)) {
+                confirmPassword.isValid = 'is-invalid'
+                confirmPassword.message = 'not matching passwords'
+                isGood = false
+            } else if (confirmPassword.value.length === 0 && confirmPassword.focused) {
+                confirmPassword.isValid = ''
+                confirmPassword.message = 'cant be empty'
+                isGood = false
+            } else {
+                confirmPassword.isValid = 'is-valid'
+                confirmPassword.message = ''
+                isGood = true
+            }
         }
-
 
         this.setState({
             email,
@@ -83,18 +110,7 @@ class CreateUser extends Component {
 
     render() {
         const { email, password, confirmPassword } = this.state
-        let emailChechValidity, passwordChechValidity, confirmCheckValidity
 
-        if (email.value.length > 0)
-            emailChechValidity = (email.isValid === true) ? 'is-valid' : 'is-invalid'
-
-        if (password.value.length > 0)
-            passwordChechValidity = (password.isValid === true) ? 'is-valid' : 'is-invalid'
-
-        if (password.value.length > 0)
-            confirmCheckValidity = (confirmPassword.isValid === true) ? 'is-valid' : 'is-invalid'
-
-        
         return (
             <div className="m-2 p-2">
                 <Form
@@ -102,7 +118,7 @@ class CreateUser extends Component {
                     <Form.Group controlId="email">
                         <Form.Label>email</Form.Label>
                         <Form.Control
-                            className={emailChechValidity}
+                            className={email.isValid}
                             required
                             type="email"
                             name="email"
@@ -110,38 +126,42 @@ class CreateUser extends Component {
                             aria-describedby="email"
                             onChange={this.onChange}
                             onClick={this.onClick}
-                            value={email.value}
-                            autoFocus />
+                            onFocus={this.onFocus}
+                            value={email.value} />
                         <Form.Text className="text-warning"><small>{email.message}</small></Form.Text>
                     </Form.Group>
 
                     <Form.Group controlId="password" >
                         <Form.Label>password</Form.Label>
                         <Form.Control
-                            className={passwordChechValidity}
+                            className={password.isValid}
                             required
                             type="password"
                             name="password"
                             placeholder="enter password"
                             aria-describedby="password"
                             onChange={this.onChange}
+                            onFocus={this.onFocus}
                             value={password.value} />
-                        <span className="help-block">{password.message}</span>
+                        <Form.Text className="text-warning"><small>{password.message}</small></Form.Text>
                     </Form.Group>
+
                     <Form.Group controlId="confirmPassword">
                         <Form.Label>confirm password</Form.Label>
                         <Form.Control
-                            className={confirmCheckValidity}
+                            className={confirmPassword.isValid}
                             required
                             type="password"
                             name="confirmPassword"
                             placeholder="confirm password"
                             aria-describedby="confirmPassword"
                             onChange={this.onChange}
+                            onFocus={this.onFocus}
                             value={confirmPassword.value} />
-                        <span className="help-block">{confirmPassword.message}</span>
+                        <Form.Text className="text-warning"><small>{confirmPassword.message}</small></Form.Text>
                     </Form.Group>
-                    <Button variant='success'  type='submit'>Register</Button>
+
+                    <Button variant='success' type='submit'>Register</Button>
                 </Form>
             </div >
         );

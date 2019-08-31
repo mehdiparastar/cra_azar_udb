@@ -40,24 +40,40 @@ class CreateUser extends Component {
     onSubmit = async e => {
         e.preventDefault();
         if (this.formIsValid()) {
-            // console.log('validate', this.state)
+            let rolesList = []
+            this.state.rolesSelectedOption.forEach(item => rolesList.push(item.value))
+
+            const dataToSend = {
+                'firstname': this.state.firstname.value,
+                'lastname': this.state.lastname.value,
+                'email': this.state.email.value,
+                'password': this.state.password.value,
+                'roles': rolesList,
+                'preview': this.state.preview
+            }
+
             try {
-                let rolesList = []
-                this.state.rolesSelectedOption.forEach(item=>rolesList.push(item.value))
+                const result = await createUser(JSON.parse(JSON.stringify(dataToSend)))
                 
-                const dataToSend = {
-                    'firstname': this.state.firstname.value,
-                    'lastname': this.state.lastname.value,
-                    'email': this.state.email.value,
-                    'password': this.state.password.value,
-                    'roles': rolesList,
-                    'preview': this.state.preview
-                }
-                const { data } = await createUser(JSON.parse(JSON.stringify(dataToSend)))
-                console.log('data', data)
+                if (result.status === 200)
+                    toast.success(
+                        <div
+                            className='text-center rtl'
+                            style={{ fontFamily: "b mitra" }}> کاربر با شناسه {result.data._id} ایجاد شد.
+                        </div>
+                    )
+                // const { data } = await createUser(JSON.parse(JSON.stringify(dataToSend)))
+                // if (data)
+                //     toast.success(<div className='text-center rtl' style={{ fontFamily: "b mitra" }}> کاربر با شناسه {data._id} ایجاد شد.</div>)
                 // window.location.replace('/admin')
             } catch (ex) {
-                toast.error(<div className='text-center' style={{ fontFamily: "b mitra" }}> ایمیل و یا پسورد اشتباه است</div>)
+                if (ex.response && ex.response.status === 409)
+                    toast.error(
+                        <div
+                            className='text-center rtl'
+                            style={{ fontFamily: "b mitra" }}>این کاربر از قبل در پایگاه داده موجود می باشد
+                        </div>
+                    )
                 console.log('ex' + ex)
             }
         }

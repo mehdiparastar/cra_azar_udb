@@ -5,11 +5,14 @@ import config from '../../src/config.json'
 //     return http.post(config.api_login,{email,password})     
 // }
 
-export function getFullNameOfUser() {
-    return http.get(config.api_users + '/userfullname')
+export function getFirstNameOfUser() {
+    return http.get(config.api_users + '/userfirstname')
 }
 
-export function createUser(user){
-    console.log(user)
+export function createUser(user) {
     return http.post(config.api_users + '/createuser', user)
+}
+
+export function getUserAvatar() {
+    return http.get(config.api_users + '/useravatar')
 }

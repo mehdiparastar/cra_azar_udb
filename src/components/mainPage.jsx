@@ -67,7 +67,7 @@ class MainPage extends Component {
 
                         <Card className="shadow">
                             <Card.Img variant="top" height="200px" src={bases_img} />
-                            <Card.Header as="h5">وظایف و اختیارات سازمان</Card.Header>
+                            <Card.Header as="h5">اساسنامه سازمان</Card.Header>
                             <Card.Body>
                                 <Card.Text className='text-justify'>هیئت وزیران در جلسات مورخ ۱۳۸۷/۷/۲۶ و ۱۳۸۸/۹/۲۲ بنا به پیشنهاد شماره ۱/۲۸۸۲۲ مورخ ۱۳۸۶/۸/۲۱ وزارت ارتباطات و فناوری اطلاعات و به استناد تبصره (۳) ماده (۷) قانون وظایف و اختیارات وزارت ارتباطات و فناوری اطلاعات - مصوب ۱۳۸۲- اساسنامه سازمان تنظیم مقررات و ارتباطات رادیوئی را تصویب نمود. </Card.Text>
                             </Card.Body>

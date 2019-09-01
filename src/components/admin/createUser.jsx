@@ -40,21 +40,19 @@ class CreateUser extends Component {
     onSubmit = async e => {
         e.preventDefault();
         if (this.formIsValid()) {
-            let rolesList = []
-            this.state.rolesSelectedOption.forEach(item => rolesList.push(item.value))
-
-            const dataToSend = {
-                'firstname': this.state.firstname.value,
-                'lastname': this.state.lastname.value,
-                'email': this.state.email.value,
-                'password': this.state.password.value,
-                'roles': rolesList,
-                'preview': this.state.preview
-            }
-
             try {
+                let rolesList = []
+                this.state.rolesSelectedOption.forEach(item => rolesList.push(item.value))
+
+                const dataToSend = {
+                    'firstname': this.state.firstname.value,
+                    'lastname': this.state.lastname.value,
+                    'email': this.state.email.value,
+                    'password': this.state.password.value,
+                    'roles': rolesList,
+                    'preview': this.state.preview
+                }
                 const result = await createUser(JSON.parse(JSON.stringify(dataToSend)))
-                
                 if (result.status === 200)
                     toast.success(
                         <div
@@ -62,11 +60,9 @@ class CreateUser extends Component {
                             style={{ fontFamily: "b mitra" }}> کاربر با شناسه {result.data._id} ایجاد شد.
                         </div>
                     )
-                // const { data } = await createUser(JSON.parse(JSON.stringify(dataToSend)))
-                // if (data)
-                //     toast.success(<div className='text-center rtl' style={{ fontFamily: "b mitra" }}> کاربر با شناسه {data._id} ایجاد شد.</div>)
                 // window.location.replace('/admin')
             } catch (ex) {
+                console.log(ex)
                 if (ex.response && ex.response.status === 409)
                     toast.error(
                         <div
@@ -74,7 +70,13 @@ class CreateUser extends Component {
                             style={{ fontFamily: "b mitra" }}>این کاربر از قبل در پایگاه داده موجود می باشد
                         </div>
                     )
-                console.log('ex' + ex)
+                else
+                    toast.error(
+                        <div
+                            className='text-center rtl'
+                            style={{ fontFamily: "b mitra" }}>خطای نا مشخص
+                        </div>
+                    )
             }
         }
         else {
@@ -100,21 +102,35 @@ class CreateUser extends Component {
         const email = { ...this.state.email }
         const password = { ...this.state.password }
         const confirmPassword = { ...this.state.confirmPassword }
-        let isGood = false
+        const rolesSelectedOption = { ...this.state.rolesSelectedOption }
+        
+        let firstnameIsGood = false
+        let lastnameIsGood = false
+        let emailIsGood = false
+        let passwordIsGood = false
+        let confirmPasswordIsGood = false
+        let rolesIsGood = false
+
+        if (rolesSelectedOption[0]) {
+            rolesIsGood = true
+        } else {
+            rolesIsGood = false
+        }
 
         if (firstname.focused) {
             if (firstname.value.length < 3) {
                 firstname.isValid = 'is-invalid'
                 firstname.message = 'نام وارد شده صحیح نمی باشد.'
-                isGood = false
-            } else if (firstname.value.length === 0) {
-                firstname.isValid = ''
-                firstname.message = 'cant be empty'
-                isGood = false
+                firstnameIsGood = false
             } else {
                 firstname.isValid = 'is-valid'
                 firstname.message = ''
-                isGood = true
+                firstnameIsGood = true
+            }
+            if (firstname.value.length === 0) {
+                firstname.isValid = ''
+                firstname.message = 'cant be empty'
+                firstnameIsGood = false
             }
         }
 
@@ -122,15 +138,16 @@ class CreateUser extends Component {
             if (lastname.value.length < 3) {
                 lastname.isValid = 'is-invalid'
                 lastname.message = 'نام خانوادگی وارد شده صحیح نمی باشد.'
-                isGood = false
-            } else if (lastname.value.length === 0) {
-                lastname.isValid = ''
-                lastname.message = 'این فیلد نمی تواند خالی باشد.'
-                isGood = false
+                lastnameIsGood = false
             } else {
                 lastname.isValid = 'is-valid'
                 lastname.message = ''
-                isGood = true
+                lastnameIsGood = true
+            }
+            if (lastname.value.length === 0) {
+                lastname.isValid = ''
+                lastname.message = 'این فیلد نمی تواند خالی باشد.'
+                lastnameIsGood = false
             }
         }
 
@@ -138,15 +155,16 @@ class CreateUser extends Component {
             if (!validator.isEmail(email.value)) {
                 email.isValid = 'is-invalid'
                 email.message = 'وارد کردن آدرس ایمیل صحیح الزامی می باشد.'
-                isGood = false
-            } else if (email.value.length === 0) {
-                email.isValid = ''
-                email.message = 'این فیلد نمی تواند خالی باشد.'
-                isGood = false
+                emailIsGood = false
             } else {
                 email.isValid = 'is-valid'
                 email.message = ''
-                isGood = true
+                emailIsGood = true
+            }
+            if (email.value.length === 0) {
+                email.isValid = ''
+                email.message = 'این فیلد نمی تواند خالی باشد.'
+                emailIsGood = false
             }
         }
 
@@ -154,15 +172,16 @@ class CreateUser extends Component {
             if ((password.value.length > 12 || password.value.length < 6)) {
                 password.isValid = 'is-invalid'
                 password.message = 'طول پسورد ورودی بایستی بین 6 تا 12 کاراکتر باشد.'
-                isGood = false
-            } else if (password.value.length === 0) {
-                password.isValid = ''
-                password.message = 'این فیلد نمی تواند خالی باشد.'
-                isGood = false
+                passwordIsGood = false
             } else {
                 password.isValid = 'is-valid'
                 password.message = ''
-                isGood = true
+                passwordIsGood = true
+            }
+            if (password.value.length === 0) {
+                password.isValid = ''
+                password.message = 'این فیلد نمی تواند خالی باشد.'
+                passwordIsGood = false
             }
         }
 
@@ -170,15 +189,16 @@ class CreateUser extends Component {
             if ((password.value !== confirmPassword.value)) {
                 confirmPassword.isValid = 'is-invalid'
                 confirmPassword.message = 'پسورد تطابق ندارد.'
-                isGood = false
-            } else if (confirmPassword.value.length === 0 && confirmPassword.focused) {
-                confirmPassword.isValid = ''
-                confirmPassword.message = 'این فیلد نمی تواند خالی باشد.'
-                isGood = false
+                confirmPasswordIsGood = false
             } else {
                 confirmPassword.isValid = 'is-valid'
                 confirmPassword.message = ''
-                isGood = true
+                confirmPasswordIsGood = true
+            }
+            if (confirmPassword.value.length === 0 && confirmPassword.focused) {
+                confirmPassword.isValid = ''
+                confirmPassword.message = 'این فیلد نمی تواند خالی باشد.'
+                confirmPasswordIsGood = false
             }
         }
 
@@ -190,7 +210,10 @@ class CreateUser extends Component {
             confirmPassword
         })
 
-        return isGood
+        if (rolesSelectedOption.length >= 1)
+            this.setState({ rolesSelectedOption })
+
+        return firstnameIsGood && lastnameIsGood && emailIsGood && passwordIsGood && confirmPasswordIsGood && rolesIsGood
     }
 
     onClose = () => {
@@ -351,9 +374,11 @@ class CreateUser extends Component {
                                             isSearchable
                                             components={animatedComponents}
                                             value={rolesSelectedOption}
+                                            name="rolesSelectedOption"
                                             options={rolesOptions}
-                                            onChange={rolesSelectedOption => {
-                                                this.setState({ rolesSelectedOption });
+                                            onChange={async rolesSelectedOption => {
+                                                await this.setState({ rolesSelectedOption });
+                                                await this.formIsValid()
                                             }} />
                                         <Form.Text className="text-muted">امکان انتخاب چندین مورد امکان پذیر است.</Form.Text>
                                     </Form.Group>

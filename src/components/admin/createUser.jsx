@@ -15,10 +15,9 @@ class CreateUser extends Component {
         email: { value: '', isValid: '', message: '', focused: false },
         password: { value: '', isValid: '', message: '', focused: false },
         confirmPassword: { value: '', isValid: '', message: '', focused: false },
-        roles: [],
         preview: null,
         src: null,
-        rolesSelectedOption: null
+        roles: { value: null, isValid: '', message: '', focused: false }
     }
 
     state = {
@@ -28,8 +27,8 @@ class CreateUser extends Component {
     onChange = async e => {
         const state = {
             ...this.state,
-            [e.target.name]: {
-                ...this.state[e.target.name],
+            [e.target.id]: {
+                ...this.state[e.target.id],
                 value: e.target.value
             }
         }
@@ -42,7 +41,7 @@ class CreateUser extends Component {
         if (this.formIsValid()) {
             try {
                 let rolesList = []
-                this.state.rolesSelectedOption.forEach(item => rolesList.push(item.value))
+                this.state.roles.value.forEach(item => rolesList.push(item.value))
 
                 const dataToSend = {
                     'firstname': this.state.firstname.value,
@@ -60,7 +59,7 @@ class CreateUser extends Component {
                             style={{ fontFamily: "b mitra" }}> کاربر با شناسه {result.data._id} ایجاد شد.
                         </div>
                     )
-                // window.location.replace('/admin')
+                this.setState(this.formDefaults)
             } catch (ex) {
                 console.log(ex)
                 if (ex.response && ex.response.status === 409)
@@ -80,6 +79,12 @@ class CreateUser extends Component {
             }
         }
         else {
+            toast.error(
+                <div
+                    className='text-center rtl'
+                    style={{ fontFamily: "b mitra" }}>فرم ناقص می باشد
+                </div>
+            )
             console.log('not validate')
             e.stopPropagation()
         }
@@ -88,8 +93,8 @@ class CreateUser extends Component {
     onFocus = e => {
         const state = {
             ...this.state,
-            [e.target.name]: {
-                ...this.state[e.target.name],
+            [e.target.id]: {
+                ...this.state[e.target.id],
                 focused: true
             }
         }
@@ -102,19 +107,23 @@ class CreateUser extends Component {
         const email = { ...this.state.email }
         const password = { ...this.state.password }
         const confirmPassword = { ...this.state.confirmPassword }
-        const rolesSelectedOption = { ...this.state.rolesSelectedOption }
-        
+        const roles = { ...this.state.roles }
+
         let firstnameIsGood = false
         let lastnameIsGood = false
         let emailIsGood = false
         let passwordIsGood = false
         let confirmPasswordIsGood = false
         let rolesIsGood = false
-
-        if (rolesSelectedOption[0]) {
-            rolesIsGood = true
-        } else {
-            rolesIsGood = false
+        
+        if (roles.focused) {
+            if (roles.value !== null) {
+                rolesIsGood = true
+                roles.isValid = "#5cb85c"
+            } else {
+                rolesIsGood = false
+                roles.isValid = "#d9534f"
+            }
         }
 
         if (firstname.focused) {
@@ -207,11 +216,9 @@ class CreateUser extends Component {
             lastname,
             email,
             password,
-            confirmPassword
+            confirmPassword,
+            roles
         })
-
-        if (rolesSelectedOption.length >= 1)
-            this.setState({ rolesSelectedOption })
 
         return firstnameIsGood && lastnameIsGood && emailIsGood && passwordIsGood && confirmPasswordIsGood && rolesIsGood
     }
@@ -225,7 +232,7 @@ class CreateUser extends Component {
     }
 
     render() {
-        const { firstname, lastname, email, password, confirmPassword, rolesSelectedOption } = this.state
+        const { firstname, lastname, email, password, confirmPassword, roles } = this.state
 
         const rolesOptions = [
             { value: 'admin', label: 'مدیر سیستم' },
@@ -237,6 +244,18 @@ class CreateUser extends Component {
 
         const animatedComponents = makeAnimated();
 
+        const customStyles = {
+            control: (provided, state) => ({
+                ...provided,
+                boxShadow: state.isFocused ? "0 0 0 0.2rem rgba(91, 192, 222, 0.35)" : 0,
+                // borderColor: state.isFocused ? "#D0EAE2" : "#CED4DA",
+                // "&:hover": {
+                //     borderColor: state.isFocused ? "#D0EAE2" : "#CED4DA"
+                // },
+                borderColor: roles.isValid
+            }),
+
+        }
         return (
             <div className="create-user">
                 <ToastContainer />
@@ -275,6 +294,7 @@ class CreateUser extends Component {
                                             required
                                             type="text"
                                             name="firstname"
+                                            id="firstname"
                                             placeholder="نام"
                                             aria-describedby="firstname"
                                             value={firstname.value}
@@ -290,6 +310,7 @@ class CreateUser extends Component {
                                             required
                                             type="text"
                                             name="lastname"
+                                            id="lastname"
                                             placeholder="نام خانوادگی"
                                             aria-describedby="lastname"
                                             value={lastname.value}
@@ -311,6 +332,7 @@ class CreateUser extends Component {
                                                 required
                                                 type="email"
                                                 name="email"
+                                                id="email"
                                                 placeholder="آدرس پست الکترونیکی خود را وارد کنید."
                                                 aria-describedby="email"
                                                 value={email.value}
@@ -333,6 +355,7 @@ class CreateUser extends Component {
                                                 required
                                                 type="password"
                                                 name="password"
+                                                id="password"
                                                 placeholder="رمز عبور مورد نظر را وارد نمایید"
                                                 aria-describedby="password"
                                                 value={password.value}
@@ -353,6 +376,7 @@ class CreateUser extends Component {
                                                 required
                                                 type="password"
                                                 name="confirmPassword"
+                                                id="confirmPassword"
                                                 placeholder="رمز عبور مورد نظر را تکرار نمایید"
                                                 aria-describedby="confirmPassword"
                                                 value={confirmPassword.value}
@@ -373,11 +397,15 @@ class CreateUser extends Component {
                                             isMulti
                                             isSearchable
                                             components={animatedComponents}
-                                            value={rolesSelectedOption}
-                                            name="rolesSelectedOption"
+                                            value={roles.value}
+                                            inputId="roles"
+                                            className={roles.isValid}
                                             options={rolesOptions}
-                                            onChange={async rolesSelectedOption => {
-                                                await this.setState({ rolesSelectedOption });
+                                            onFocus={this.onFocus}
+                                            styles={customStyles}
+                                            // onChange={this.onChange}
+                                            onChange={async e => {
+                                                await this.setState({ ...this.state, roles: { ...this.state.roles, value: e } });
                                                 await this.formIsValid()
                                             }} />
                                         <Form.Text className="text-muted">امکان انتخاب چندین مورد امکان پذیر است.</Form.Text>
@@ -396,182 +424,3 @@ class CreateUser extends Component {
 }
 
 export default CreateUser;
-
-
-
-
-
-
-
-
-// class CreateUser extends Component {
-//     formDefaults = {
-//         email: { value: '', isValid: '', message: '', focused: false },
-//         password: { value: '', isValid: '', message: '', focused: false },
-//         confirmPassword: { value: '', isValid: '', message: '', focused: false }
-//     }
-
-//     state = {
-//         ...this.formDefaults
-//     };
-
-//     onChange = async e => {
-//         const state = {
-//             ...this.state,
-//             [e.target.name]: {
-//                 ...this.state[e.target.name],
-//                 value: e.target.value
-//             }
-//         }
-//         await this.setState(state)
-//         await this.formIsValid()
-//     }
-
-//     onSubmit = e => {
-//         e.preventDefault();
-//         if (this.formIsValid())
-//             console.log('validate')
-//         else
-//             console.log('not validate')
-//     }
-
-//     onFocus = e => {
-//         const state = {
-//             ...this.state,
-//             [e.target.name]: {
-//                 ...this.state[e.target.name],
-//                 focused: true
-//             }
-//         }
-//         this.setState(state)
-//     }
-
-//     formIsValid = () => {
-//         const email = { ...this.state.email }
-//         const password = { ...this.state.password }
-//         const confirmPassword = { ...this.state.confirmPassword }
-//         let isGood = false
-
-//         if (email.focused) {
-//             if (!validator.isEmail(email.value)) {
-//                 email.isValid = 'is-invalid'
-//                 email.message = 'Not a valid Email address'
-//                 isGood = false
-//             } else if (email.value.length === 0) {
-//                 email.isValid = ''
-//                 email.message = 'cant be empty'
-//                 isGood = false
-//             } else {
-//                 email.isValid = 'is-valid'
-//                 email.message = ''
-//                 isGood = true
-//             }
-//         }
-
-//         if (password.focused) {
-//             if ((password.value.length > 12 || password.value.length < 6)) {
-//                 password.isValid = 'is-invalid'
-//                 password.message = 'password length be 6-12'
-//                 isGood = false
-//             } else if (password.value.length === 0) {
-//                 password.isValid = ''
-//                 password.message = 'cant be empty'
-//                 isGood = false
-//             } else {
-//                 password.isValid = 'is-valid'
-//                 password.message = ''
-//                 isGood = true
-//             }
-//         }
-
-//         if (confirmPassword.focused) {
-//             if ((password.value !== confirmPassword.value)) {
-//                 confirmPassword.isValid = 'is-invalid'
-//                 confirmPassword.message = 'not matching passwords'
-//                 isGood = false
-//             } else if (confirmPassword.value.length === 0 && confirmPassword.focused) {
-//                 confirmPassword.isValid = ''
-//                 confirmPassword.message = 'cant be empty'
-//                 isGood = false
-//             } else {
-//                 confirmPassword.isValid = 'is-valid'
-//                 confirmPassword.message = ''
-//                 isGood = true
-//             }
-//         }
-
-//         this.setState({
-//             email,
-//             password,
-//             confirmPassword
-//         })
-
-//         return isGood
-//     }
-
-//     render() {
-//         const { email, password, confirmPassword } = this.state
-
-//         return (
-//             <div className="m-2 p-2">
-//                 <Form
-//                     onSubmit={this.onSubmit}>
-//                     <Form.Group controlId="email">
-//                         <Form.Label>email</Form.Label>
-//                         <Form.Control
-//                             className={email.isValid}
-//                             required
-//                             type="email"
-//                             name="email"
-//                             placeholder="enter email"
-//                             aria-describedby="email"
-//                             onChange={this.onChange}
-//                             onClick={this.onClick}
-//                             onFocus={this.onFocus}
-//                             value={email.value} />
-//                         <Form.Text className="text-warning"><small>{email.message}</small></Form.Text>
-//                     </Form.Group>
-
-//                     <Form.Group controlId="password" >
-//                         <Form.Label>password</Form.Label>
-//                         <Form.Control
-//                             className={password.isValid}
-//                             required
-//                             type="password"
-//                             name="password"
-//                             placeholder="enter password"
-//                             aria-describedby="password"
-//                             onChange={this.onChange}
-//                             onFocus={this.onFocus}
-//                             value={password.value} />
-//                         <Form.Text className="text-warning"><small>{password.message}</small></Form.Text>
-//                     </Form.Group>
-
-//                     <Form.Group controlId="confirmPassword">
-//                         <Form.Label>confirm password</Form.Label>
-//                         <Form.Control
-//                             className={confirmPassword.isValid}
-//                             required
-//                             type="password"
-//                             name="confirmPassword"
-//                             placeholder="confirm password"
-//                             aria-describedby="confirmPassword"
-//                             onChange={this.onChange}
-//                             onFocus={this.onFocus}
-//                             value={confirmPassword.value} />
-//                         <Form.Text className="text-warning"><small>{confirmPassword.message}</small></Form.Text>
-//                     </Form.Group>
-
-//                     <Button variant='success' type='submit'>Register</Button>
-//                 </Form>
-//             </div >
-//         );
-//     }
-// }
-
-// export default CreateUser;
-
-
-// import React, { Component } from 'react';
-// import { Form, ValidatedInput } from 'react-bootstrap-validation'
-// import userAvatar from '../../images/man.png' https://www.npmjs.com/package/react-bootstrap-validation

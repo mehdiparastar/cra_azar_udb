@@ -3,6 +3,7 @@ import {Switch, Route} from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import NavBar from './navbar';
 import Logout from './logout';
+import Sidebar from './sidebar';
 
 class Dashboard extends Component {
     render() { 
@@ -11,7 +12,7 @@ class Dashboard extends Component {
                 <ToastContainer />
                 <NavBar />
                 <div className='row'>
-                    {/* <Sidebar /> */}
+                    <Sidebar />
                     <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-4'>
                         <Switch>
                             {/* <Route path='/admin/create-post' component={CreatePost} />

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import {Switch, Route} from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import NavBar from './navbar';
 import Logout from './logout';
 import Sidebar from './sidebar';
 
 class Dashboard extends Component {
-    render() { 
-        return ( 
+    render() {
+        return (
             <div className='container-fluid rtl' style={{ fontFamily: "b mitra" }}>
                 <ToastContainer />
                 <NavBar />
+                <Sidebar className="mt-5" />
                 <div className='row'>
-                    <Sidebar />
                     <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-4'>
                         <Switch>
                             {/* <Route path='/admin/create-post' component={CreatePost} />
@@ -26,8 +26,8 @@ class Dashboard extends Component {
                     </main>
                 </div>
             </div>
-         );
+        );
     }
 }
- 
+
 export default Dashboard;

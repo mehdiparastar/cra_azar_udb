@@ -7,6 +7,7 @@ import validator from 'validator';
 import Avatar from 'react-avatar-edit'
 import { createUser } from '../../services/userService';
 import { toast, ToastContainer } from 'react-toastify';
+import '../../css/createUser.css'
 
 class CreateUser extends Component {
     formDefaults = {

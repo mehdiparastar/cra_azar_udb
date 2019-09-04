@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import logo from '../images/CraLogoCircle.png'
+import '../css/mainPage.css';
 import history_img from '../images/cra-img/01.jpg'
 import duties_img from '../images/cra-img/02.jpg'
 import bases_img from '../images/cra-img/03.jpeg'
 import { Nav, NavDropdown, Navbar, Form, FormControl, Button, Card, CardDeck, Container, ListGroup, Row, Spinner } from 'react-bootstrap'
-// Badge, ProgressBar, Container, Tab, Col, Breadcrumb, Jumbotron, Table 
 
 class MainPage extends Component {
 
     render() {
 
         return (
-            <div className="main_page_bg rtl" style={{ fontFamily: "b mitra" }}>
+            <div className="main_page_bg rtl">
 
                 <Navbar bg="dark" variant="dark" expand="md" sticky="top">
                     <Navbar.Brand href="#home">
@@ -44,7 +44,7 @@ class MainPage extends Component {
                             <Card.Img variant="top" height="200px" src={history_img} />
                             <Card.Header as="h5">تاریخچه سازمان</Card.Header>
                             <Card.Body>
-                                <Card.Text className='text-justify'>سازمان تنظیم مقررات و ارتباطات رادیویی در سال ۱۳۸۲ و با استناد به ماده هفت قانون وظایف و اختیارات وزارت ارتباطات و فناوری اطلاعات از تجمیع معاونت امور مخابراتی این وزارتخانه و اداره‌کل ارتباطات رادیوئی تاسیس شد. هدف از ایجاد این سازمان ایفای اختیارات حاکمیتی، نظارتی و اجرایی وزارت ارتباطات و فناوری اطلاعات در بخش تنظیم مقررات و ارتباطات رادیوئی است تا به عنوان نهاد نظارتی زمینه رقابتی شدن بازار ارائه خدمات مخابراتی و بالارفتن کیفیت خدمات ارتباطی را فراهم کند.</Card.Text>
+                                <Card.Text className='text-justify'>سازمان تنظیم مقررات و ارتباطات رادیویی در سال ۱۳۸۲ و با استناد به ماده هفت قانون وظایف و اختیارات وزارت ارتباطات و فناوری اطلاعات از تجمیع معاونت امور مخابراتی این وزارتخانه و اداره‌کل ارتباطات رادیوئی تاسیس شد. هدف از ایجاد این سازمان ایفای اختیارات حاکمیتی، نظارتی و اجرایی وزارت ارتباطات و فناوری اطلاعات در بخش تنظیم مقررات و ارتباطات رادیوئی است.</Card.Text>
                             </Card.Body>
                             <Card.Footer>
                                 <small className="text-muted">دیروز نوشته شده است.</small>

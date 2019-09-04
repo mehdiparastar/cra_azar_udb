@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
+// import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.css';
 import 'font-awesome/css/font-awesome.css';
 import './css/index.css';
-import './css/login.css';
-import './css/mainPage.css';
-import './css/createUser.css'
+import 'react-metismenu/dist/react-metismenu-standart.min.css'
 import * as serviceWorker from './serviceWorker';
 import Login from './components/admin/login';
 import MainPage from './components/mainPage';

@@ -1,27 +1,88 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import adminNavLinks from '../../services/adminNavLinks';
 import '../../css/sidebar.css'
-import { Nav } from 'react-bootstrap'
-import MetisMenu from 'react-metismenu'
-import RouterLink from 'react-metismenu-router-link';
+import { Link } from 'react-router-dom'
+import { ListGroup, ListGroupItem, Jumbotron, Card, Accordion, Button, InputGroup, Form, Row, Col } from 'react-bootstrap'
+import Clock from 'react-digital-clock';
+import UserAvatar from '../admin/userAvatar'
+import UserFirstName from '../admin/userFirstName'
 
 class Sidebar extends Component {
-    state = {
-        activeLinkId: 23
+    constructor(props) {
+        super(props);
+        this.state = {};
     }
 
     render() {
 
         return (
-            <MetisMenu
-                className="sidebar mt-5"
-                classNameItem="sidebar-items"
-                // activeLinkId={this.state.activeLinkId} 
-                content={adminNavLinks} LinkComponent={RouterLink}/>
-        );
+            <Accordion id="sidebar" className="bg-light">
+                <Jumbotron className="">
+                    <Row>
+                        <Col>
+                            <UserAvatar />
+                        </Col>
+                        <Col>
+                            <Row>
+                                <Clock hour12={false} />
+                            </Row>
+                            <Row>
+                                <UserFirstName />
+                            </Row>
+                        </Col>
+                    </Row>
+                </Jumbotron>
+                <InputGroup id="searchBox" >
+                    <InputGroup.Prepend >
+                        <InputGroup.Text as={Button} id="search"><span className="fa fa-search p-0"></span></InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                        id="search"
+                        placeholder="جستجو کنید."
+                        className="rounded-0"
+                    />
+                    {/* <input id="search"></input> */}
+
+                </InputGroup>
+                {adminNavLinks.map((nav) => {
+                    return (
+                        <Card key={nav.id}>
+                            <Card.Header>
+                                <Accordion.Toggle as={Button} variant="link" eventKey={nav.id}>
+                                    <span><i className={nav.icon} />{nav.label}</span>
+                                </Accordion.Toggle>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey={nav.id}>
+                                <Card.Body className="p-0">
+                                    <ListGroup className="list-group-flush p-0">
+                                        {nav.content.map((content) => (
+                                            <ListGroupItem key={content.id}>
+                                                <Link to={content.to}>
+                                                    <small><i className={nav.icon} />{content.label}</small></Link>
+                                            </ListGroupItem>
+                                        ))}
+                                    </ListGroup>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    )
+                })}
+                <Card className="text-center rounded-0 stickyBottom">
+                    <Card.Footer>
+                        <i className="fa fa-facebook-official" />
+                        <i className="fa fa-google-plus-square" />
+                        <i className="fa fa-telegram" />
+                        <i className="fa fa-instagram" />
+                        <i className="fa fa-twitter-square" />
+                        <i className="fa fa-youtube-square" />
+                        <i className="fa fa-tumblr-square" />
+                    </Card.Footer>
+                </Card>
+            </Accordion>
+        )
     }
 }
+
 
 export default Sidebar;
 

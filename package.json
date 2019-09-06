@@ -19,14 +19,14 @@
     "react-bootstrap-validation": "^0.1.11",
     "react-burger-menu": "^2.6.11",
     "react-custom-validation": "^0.5.7",
+    "react-digital-clock": "^0.1.2",
     "react-dom": "^16.9.0",
-    "react-metismenu": "^1.4.0",
-    "react-metismenu-router-link": "^2.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.0",
     "react-select": "^3.0.4",
     "react-sidemenu": "^1.1.0",
-    "react-toastify": "^5.3.2"
+    "react-toastify": "^5.3.2",
+    "reactstrap": "^8.0.1"
   },
   "scripts": {
     "start": "set PORT=8000 && react-scripts start",

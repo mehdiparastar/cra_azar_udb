@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { login } from '../../services/loginService';
 import { ToastContainer, toast } from 'react-toastify';
-import '../../css/login.css';
+import '../../css/admin/login.css';
 
 
 class Login extends Component {

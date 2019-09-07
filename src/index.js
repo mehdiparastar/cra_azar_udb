@@ -6,11 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.css';
 import 'font-awesome/css/font-awesome.css';
 import './css/index.css';
-import 'react-metismenu/dist/react-metismenu-standart.min.css'
 import * as serviceWorker from './serviceWorker';
 import Login from './components/admin/login';
 import MainPage from './components/mainPage';
-import Dashboard from './components/admin/dashboard'
+import Dashboard from './components/post_pishkhan/dashboard'
 import CreateUser from './components/admin/createUser';
 
 

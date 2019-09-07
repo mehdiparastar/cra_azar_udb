@@ -12,7 +12,7 @@ body {
 }
 
 .create-user{
-    background-image: url('../images/bg-01/bg-09.jpg');
+    background-image: url('../../images/bg-01/bg-09.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

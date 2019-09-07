@@ -1,0 +1,11 @@
+#main{
+    background-image: url('../../images/bg-01/bg-11.jpg');    
+    opacity: 0.9;
+    background-position: center;
+    background-repeat: repeat;
+    height: 100%;
+    width: 100%;  
+    position: fixed; 
+    margin-right: 240px;
+    /* margin-top: 40px; */
+}

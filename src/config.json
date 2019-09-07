@@ -1,4 +1,4 @@
 {
-    "api_login":"http://localhost:3900/api/login",
-    "api_users":"http://localhost:3900/api/users"
+    "api_login":"http://192.168.33.26:3900/api/login",
+    "api_users":"http://192.168.33.26:3900/api/users"
 }

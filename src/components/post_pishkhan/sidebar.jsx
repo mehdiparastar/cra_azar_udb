@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import adminNavLinks from '../../services/adminNavLinks';
-import '../../css/sidebar.css'
+import '../../css/post_pishkhan/sidebar.css'
 import { Link } from 'react-router-dom'
 import { ListGroup, ListGroupItem, Jumbotron, Card, Accordion, Button, InputGroup, Form, Row, Col } from 'react-bootstrap'
 import Clock from 'react-digital-clock';
@@ -39,10 +39,7 @@ class Sidebar extends Component {
                     <Form.Control
                         id="search"
                         placeholder="جستجو کنید."
-                        className="rounded-0"
-                    />
-                    {/* <input id="search"></input> */}
-
+                        className="rounded-0" />
                 </InputGroup>
                 {adminNavLinks.map((nav) => {
                     return (

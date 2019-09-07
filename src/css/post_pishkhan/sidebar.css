@@ -11,7 +11,7 @@
     width: 240px;
     box-shadow: 0 0 5px 0.5px black;
     height: 100vh;
-    text-decoration: none;
+    text-decoration: none;    
     /* padding: 48px 0 0; */
     /* background-color: #333;
     padding-left: 0; */
@@ -39,7 +39,7 @@
     padding-right: 35px;
 }
 
-.fa {
+#sidebar .fa {
     padding-left: 10px;
 }
 
@@ -49,7 +49,6 @@
     background-color: #32506d;
     padding: 5px;
 }
-
 
 #sidebar .stickyBottom {
     position: fixed;
@@ -64,47 +63,77 @@
     border-bottom: -1px;
 }
 
-#searchBox .input-group-text{
+#searchBox .input-group-text {
     border-radius: 0;
 }
 
 .fa-facebook, .fa-facebook-official {
     color: #3b5998
 }
+
 .fa-twitter, .fa-twitter-square {
     color: #00aced
 }
+
 .fa-google-plus, .fa-google-plus-square {
     color: #dd4b39
 }
+
 .fa-youtube, .fa-youtube-play, .fa-youtube-square {
     color: #bb0000
 }
+
 .fa-tumblr, .fa-tumblr-square, .fa-telegram {
     color: #32506d
 }
+
 .fa-vine {
     color: #00bf8f
 }
+
 .fa-flickr {
     color: #ff0084
 }
+
 .fa-vimeo-square {
     color: #aad450
 }
+
 .fa-pinterest, .fa-pinterest-square {
     color: #cb2027
 }
+
 .fa-linkedin, .fa-linkedin-square {
     color: #007bb6
 }
+
 .fa-instagram {
     color: #517fa4;
 }
+
 .fa-spotify {
     color: #1ED760;
 }
 
+.fa-address-card {
+    color: #81c91d;
+}
+
+.fa-bug {
+    color: #cb2027;
+}
+
+.fa-wrench {
+    color: #fd7e15;
+}
+
+.fa-houzz {
+    color: #be4bdc;
+}
+
+.fa-list{
+    color: #dc4b94;
+}
 /* 
 .sidebar {
     position: fixed;

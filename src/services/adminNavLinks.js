@@ -7,7 +7,7 @@ const adminNavLinks = [
             {
                 id: 11,
                 label: 'اطلاعات عمومی',
-                to: '/admin/licenses',
+                to: '/admin/licenses_public_data',
                 icon: 'fas fa-caret-left'
             },
             {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Badge, Col, Row } from 'react-bootstrap';
+import { Navbar, Nav, Badge, Col } from 'react-bootstrap';
 
 class NavBar extends Component {
     render() {
@@ -14,12 +14,9 @@ class NavBar extends Component {
                     zIndex: 99,
                     height: "40px",
                     marginRight: "240px"
-                }}
-            >
-                {/* <Row className="justify-content-center px-4"> */}
-                    <Col><h6 className="text-light">رتبه دفتر <Badge variant="success">10</Badge></h6></Col>
-                    <Col><h6 className="text-light">امتیاز منفی <Badge variant="danger">100</Badge></h6></Col>                    
-                {/* </Row> */}
+                }}>
+                <Col><h6 className="text-light">رتبه دفتر <Badge variant="success">10</Badge></h6></Col>
+                <Col><h6 className="text-light">امتیاز منفی <Badge variant="danger">100</Badge></h6></Col>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav.Link className="ml-auto text-warning" href="/admin/logout">خروج</Nav.Link>

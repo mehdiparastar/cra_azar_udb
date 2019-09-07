@@ -13,7 +13,7 @@ const adminNavLinks = [
             {
                 id: 12,
                 label: 'اقدامات ارجاعی',
-                to: '/admin/licenses',
+                to: '/admin/test_comp',
                 icon: 'fas fa-caret-left'
             },
             {

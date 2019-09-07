@@ -8,7 +8,7 @@ import LicensePublicData from './license/licensePublicData'
 import Sidebar from './sidebar';
 // import { Row, Col } from 'react-bootstrap'
 import '../../css/post_pishkhan/dashboard.css'
-
+import TestComp from '../testComp'
 
 class Dashboard extends Component {
     render() {
@@ -21,8 +21,9 @@ class Dashboard extends Component {
                     <Switch>
                         <Route path='/admin/logout' component={Logout} />
                         <Route path='/admin/licenses_public_data' component={LicensePublicData} />
+                        <Route path='/admin/test_comp' component={TestComp}/>
                     </Switch>
-                </main>
+                </main >
             </div>
         );
     }

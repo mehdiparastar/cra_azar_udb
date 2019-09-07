@@ -11,7 +11,6 @@ class LicenseOfficeStatus extends Component {
     }
     render() {
         const options = licensePPComboValues
-        console.log(options["licenseStatus"])
         return (
             <Card id="licenseOfficeStatus" style={{ width: "360px", fontSize: 13 }}>
                 <Card.Header className="text-center bg-success text-light">وضعیت دفتر</Card.Header>
@@ -32,7 +31,7 @@ class LicenseOfficeStatus extends Component {
                                 <Form.Label>وضعیت فعالیت</Form.Label>
                             </Col>
                             <Col xs={9}>
-                                <Select options={options.controlId} inputId="activityStatus" />
+                                <Select options={options.activityStatus} inputId="activityStatus" />
                             </Col>
                         </FormGroup>
 
@@ -41,7 +40,7 @@ class LicenseOfficeStatus extends Component {
                                 <Form.Label>نوع شخص</Form.Label>
                             </Col>
                             <Col xs={9}>
-                                <Select options={options.controlId} inputId="ownerType" />
+                                <Select options={options.ownerType} inputId="ownerType" />
                             </Col>
                         </FormGroup>
 
@@ -50,7 +49,7 @@ class LicenseOfficeStatus extends Component {
                                 <Form.Label>نوع مالکیت دفتر</Form.Label>
                             </Col>
                             <Col xs={9}>
-                                <Select options={options.controlId} inputId="possessionType" />
+                                <Select options={options.possessionType} inputId="possessionType" />
                             </Col>
                         </FormGroup>
 

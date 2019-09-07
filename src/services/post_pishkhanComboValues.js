@@ -1,26 +1,25 @@
 const licensePPComboValues = {
-    licenseStatus: {
-        "valid": "دارای اعتبار",
-        "invalid": "پایان اعتبار",
-        "expire": "لغو پروانه",
-        "renewal": "در دست بررسی - تمدید",
-        "suspend": "تعلیق",
-        "rename": "در دست بررسی - تغییرنام",
-        "displacement": "در دست بررسی - تغییر مکان"
-    },
-    activityStatus: {
-        "active": "فعال",
-        "inactive": "غیر فعال"
-    },
-    ownerType: {
-        "natural": "حقیقی",
-        "legal": "حقوقی"
-    },
-    possessionType: {
-        "personal": "شخصی",
-        "leased": "استیجاری"
-    }
+    licenseStatus: [
+        { value: "valid", label: "دارای اعتبار" },
+        { value: "invalid", label: "پایان اعتبار" },
+        { value: "expire", label: "لغو پروانه" },
+        { value: "renewal", label: "در دست بررسی - تمدید" },
+        { value: "suspend", label: "تعلیق" },
+        { value: "rename", label: "در دست بررسی - تغییرنام" },
+        { value: "displacement", label: "در دست بررسی - تغییر مکان" },
+    ],
+    activityStatus: [
+        { value: "active", label: "فعال" },
+        { value: "inactive", label: "غیر فعال" },
+    ],
+    ownerType: [
+        { value: "natural", label: "حقیقی" },
+        { value: "legal", label: "حقوقی" },
+    ],
+    possessionType: [
+        { value: "personal", label: "شخصی" },
+        { value: "leased", label: "استیجاری" },
+    ]
 }
-
 
 export { licensePPComboValues }

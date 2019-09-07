@@ -5,7 +5,8 @@
     background-repeat: repeat;
     height: 100%;
     width: 100%;  
-    position: fixed; 
+    position: relative; 
     margin-right: 240px;
+    margin-bottom: 20px;
     /* margin-top: 40px; */
 }

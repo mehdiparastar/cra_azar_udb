@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import LicenseOfficeLocation from './sub/officeLocation'
 import LicenseOfficeStatus from './sub/officeStatus'
 
@@ -11,10 +11,14 @@ class LicensePublicData extends Component {
     render() {
 
         return (
-            <Container className="mt-5">
+            <Container className="mt-2">
                 <Row>
-                    <LicenseOfficeLocation />
-                    <LicenseOfficeStatus />
+                    <Col>
+                        <LicenseOfficeLocation />
+                    </Col>
+                    <Col>
+                        <LicenseOfficeStatus />
+                    </Col>
                 </Row>
             </Container>
         );

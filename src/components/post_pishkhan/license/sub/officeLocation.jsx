@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Container, Row, Col, Card, FormGroup, InputGroup, Button } from 'react-bootstrap'
+import { Form, Row, Col, Card, FormGroup } from 'react-bootstrap'
 import Select from 'react-select'
 import '../../../../css/post_pishkhan/license/sub/officeLocation.css'
 
@@ -19,7 +19,7 @@ class LicenseOfficeLocation extends Component {
                 <Card.Header className="text-center bg-success text-light">موقعیت دفتر</Card.Header>
                 <Card.Body>
                     <Form>
-                        <FormGroup as={Row} className="text-center" as={Row} controlId="cityOrVillage">
+                        <FormGroup as={Row} className="text-center" controlId="cityOrVillage">
                             <Col xs={6}>
                                 <Form.Check type="radio" label="شهری" name="cityOrVillage" id="isCity" />
                             </Col>

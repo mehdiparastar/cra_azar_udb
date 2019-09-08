@@ -27,7 +27,8 @@
     "react-select": "^3.0.4",
     "react-sidemenu": "^1.1.0",
     "react-toastify": "^5.3.2",
-    "reactstrap": "^8.0.1"
+    "reactstrap": "^8.0.1",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "set PORT=7500 && react-scripts start",

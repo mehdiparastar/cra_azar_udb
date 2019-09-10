@@ -1,10 +1,7 @@
 @font-face {
   font-family: 'davat';
   src: url('../fonts/BDavat.eot');
-  src: url('../fonts/BDavat.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/BDavat.woff2') format('woff2'),
-      url('../fonts/BDavat.woff') format('woff'),
-      url('../fonts/BDavat.ttf') format('truetype');
+  src: url('../fonts/BDavat.eot?#iefix') format('embedded-opentype'), url('../fonts/BDavat.woff2') format('woff2'), url('../fonts/BDavat.woff') format('woff'), url('../fonts/BDavat.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -12,10 +9,7 @@
 @font-face {
   font-family: 'yekan';
   src: url('../fonts/BYekan.eot');
-  src: url('../fonts/BYekan.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/BYekan.woff2') format('woff2'),
-      url('../fonts/BYekan.woff') format('woff'),
-      url('../fonts/BYekan.ttf') format('truetype');
+  src: url('../fonts/BYekan.eot?#iefix') format('embedded-opentype'), url('../fonts/BYekan.woff2') format('woff2'), url('../fonts/BYekan.woff') format('woff'), url('../fonts/BYekan.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,16 +19,15 @@ body {
   font-family: 'yekan';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color:  #f5f5f5;
-
+  background-color: #f5f5f5;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* Position and sizing of burger button */
+
 .bm-burger-button {
   position: fixed;
   width: 36px;
@@ -44,22 +37,26 @@ code {
 }
 
 /* Color/shape of burger icon bars */
+
 .bm-burger-bars {
   background: #373a47;
 }
 
 /* Color/shape of burger icon bars on hover*/
+
 .bm-burger-bars-hover {
   background: #a90000;
 }
 
 /* Position and sizing of clickable cross button */
+
 .bm-cross-button {
   height: 24px;
   width: 24px;
 }
 
 /* Color/shape of close button cross */
+
 .bm-cross {
   background: #bdc3c7;
 }
@@ -68,12 +65,14 @@ code {
 Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
 */
+
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
 }
 
 /* General sidebar styles */
+
 .bm-menu {
   background: #373a47;
   padding: 2.5em 1.5em 0;
@@ -81,22 +80,27 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 /* Morph shape necessary with bubble or elastic */
+
 .bm-morph-shape {
   fill: #373a47;
 }
 
 /* Wrapper for item list */
+
 .bm-item-list {
   color: #b8b7ad;
   padding: 0.8em;
 }
 
 /* Individual item */
+
 .bm-item {
   display: inline-block;
 }
 
 /* Styling of overlay */
+
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+

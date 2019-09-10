@@ -4,11 +4,11 @@ import { ToastContainer } from 'react-toastify';
 import NavBar from './navbar';
 import Logout from '../admin/logout';
 import LicensePublicData from './license/licensePublicData'
-// import CreateUser from '../admin/createUser'
+import CreateUser from '../admin/createUser'
 import Sidebar from './sidebar';
 // import { Row, Col } from 'react-bootstrap'
 import '../../css/post_pishkhan/dashboard.css'
-import TestComp from '../testComp'
+import { TestComp } from '../testComp'
 
 class Dashboard extends Component {
     render() {
@@ -21,7 +21,8 @@ class Dashboard extends Component {
                     <Switch>
                         <Route path='/admin/logout' component={Logout} />
                         <Route path='/admin/licenses_public_data' component={LicensePublicData} />
-                        <Route path='/admin/test_comp' component={TestComp}/>
+                        <Route path='/admin/test_comp' component={TestComp} />
+                        <Route path='/admin/createuser' component={CreateUser} />
                     </Switch>
                 </main >
             </div>

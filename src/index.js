@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 // import 'bootstrap/dist/css/bootstrap.css'
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.css';
 import 'font-awesome/css/font-awesome.css';
 import './css/index.css';

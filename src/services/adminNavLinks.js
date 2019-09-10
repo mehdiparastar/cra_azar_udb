@@ -19,7 +19,7 @@ const adminNavLinks = [
             {
                 id: 13,
                 label: 'سوابق دفتر',
-                to: '/admin/licenses',
+                to: '/admin/createuser',
                 icon: 'fas fa-caret-left'
             },
             {

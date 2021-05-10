@@ -12,7 +12,7 @@
     "font-awesome": "^4.7.0",
     "formik": "^1.5.8",
     "jquery": "^3.4.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mdbreact": "^4.19.2",
     "ng-sidebar": "^9.1.1",
     "popper.js": "^1.15.0",
